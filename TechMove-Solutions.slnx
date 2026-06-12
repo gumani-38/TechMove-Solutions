@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/db-backup/">
+    <File Path="../../../../../Program Files/Microsoft SQL Server/MSSQL17.SQLEXPRESS/MSSQL/Backup/TechMoveDb.bak" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="docker-compose.yml" />
+  </Folder>
+  <Project Path="Gumani_Moila_EAPD7111w_POE/Gumani_Moila_EAPD7111w_POE.csproj" />
+  <Project Path="TechMove-API/TechMove-API.csproj" />
+  <Project Path="TechMoveNunitsTests/TechMoveNunitsTests.csproj" />
+</Solution>
