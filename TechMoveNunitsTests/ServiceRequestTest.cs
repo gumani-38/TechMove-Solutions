@@ -55,9 +55,9 @@ namespace TechMoveNunitsTests
             _context.SaveChanges();
         }
 
-        // ✅ GET: api/ServiceRequests
+        // get service requests
         [Test]
-        public async Task GetAllServiceRequests_ReturnsOkResult()
+        public async Task GetAll_ServiceRequests_Returns_passed()
         {
             _context.ServiceRequests.Add(new ServiceRequest { Id = 1, Description = "Test SR", ContractId = 1 });
             _context.SaveChanges();
@@ -71,9 +71,9 @@ namespace TechMoveNunitsTests
             Assert.AreEqual(1, serviceRequests.Count);
         }
 
-        // ✅ GET: api/ServiceRequests/{id}
+        //  get service request by id
         [Test]
-        public async Task GetServiceRequestById_ReturnsOk_WhenExists()
+        public async Task GetServiceRequestById_returns_ServiceRequest_WhenExists()
         {
             _context.ServiceRequests.Add(new ServiceRequest { Id = 2, Description = "ById SR", ContractId = 1 });
             _context.SaveChanges();
@@ -94,9 +94,9 @@ namespace TechMoveNunitsTests
             Assert.IsInstanceOf<NotFoundResult>(result);
         }
 
-        // ✅ GET: api/ServiceRequests/Convert
+        // get currency conversion 
         [Test]
-        public async Task GetConvertedCurrency_ReturnsOk_WithConvertedAmount()
+        public async Task GetConvertedCurrency_Returns_passed_with_ValidAmount()
         {
             var result = await _controller.GetConvertedCurrency(10m);
 
@@ -112,9 +112,9 @@ namespace TechMoveNunitsTests
         }
 
 
-        // ✅ POST: api/ServiceRequests
+        // insert new service request
         [Test]
-        public async Task Create_ReturnsCreatedAtActionResult_WhenValidContract()
+        public async Task Create_ReturnsCreatedAtActionResult_Only_contractExists()
         {
             var sr = new ServiceRequest { Id = 3, Description = "New SR", ContractId = 1, Cost = 100, Type = ServiceRequest.RequestType.delivery };
 
@@ -124,6 +124,8 @@ namespace TechMoveNunitsTests
             var created = result as CreatedAtActionResult;
             Assert.NotNull(created.Value);
         }
+
+        // Invalid contract id should return bad request
 
         [Test]
         public async Task Create_ReturnsBadRequest_WhenContractInvalid()
@@ -135,7 +137,7 @@ namespace TechMoveNunitsTests
             Assert.IsInstanceOf<BadRequestObjectResult>(result);
         }
 
-        // ✅ PUT: api/ServiceRequests/{id}
+        // update existing service request by id
         [Test]
         public async Task Edit_ReturnsOk_WhenUpdateSuccessful()
         {
@@ -158,7 +160,7 @@ namespace TechMoveNunitsTests
                 Type = ServiceRequest.RequestType.returnRequest
             };
 
-            // Detach the tracked entity to avoid duplicate tracking
+            // remove tracked entity to avoid state conflicts during the test
             var tracked = _context.ServiceRequests.Local.FirstOrDefault(s => s.Id == sr.Id);
             if (tracked != null)
             {
@@ -170,18 +172,18 @@ namespace TechMoveNunitsTests
             Assert.IsInstanceOf<OkObjectResult>(result);
         }
 
-
+        // return bad request if id of service request doesn't match id in url
         [Test]
-        public async Task Edit_ReturnsBadRequest_WhenIdMismatch()
+        public async Task Edit_Returns_BadRequest_WhenIdMismatch()
         {
             var sr = new ServiceRequest { Id = 10, Description = "Mismatch SR", ContractId = 1 };
             var result = await _controller.Edit(11, sr);
             Assert.IsInstanceOf<BadRequestObjectResult>(result);
         }
 
-        // ✅ DELETE: api/ServiceRequests/{id}
+        // remove service request by id
         [Test]
-        public async Task Delete_ReturnsNoContent_WhenDeleted()
+        public async Task Delete_Returns_null_WhenDeleted()
         {
             _context.ServiceRequests.Add(new ServiceRequest { Id = 6, Description = "Delete SR", ContractId = 1 });
             _context.SaveChanges();
@@ -193,6 +195,8 @@ namespace TechMoveNunitsTests
             Assert.Null(deleted);
         }
 
+        // invalid id should return not found for delete
+
         [Test]
         public async Task Delete_ReturnsNotFound_WhenMissing()
         {
@@ -201,7 +205,7 @@ namespace TechMoveNunitsTests
         }
     }
 
-    // 🔧 Fake HttpMessageHandler to mock currency API
+    //  Fake HttpMessageHandler to mock currency API
     public class FakeHttpMessageHandler : HttpMessageHandler
     {
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)

@@ -39,7 +39,7 @@ namespace TechMoveNunitsTests
             _context.SaveChanges();
         }
 
-        // ✅ GET: api/Contracts with filters
+        // get contracts with filter data
         [Test]
         public async Task GetAllContracts_ReturnsFilteredContracts_ByStatus()
         {
@@ -54,9 +54,9 @@ namespace TechMoveNunitsTests
             Assert.AreEqual(Contract.ContractStatus.active, contracts[0].Status);
         }
 
-        // ✅ GET: api/Contracts/{id}
+        // get contract by id 
         [Test]
-        public async Task GetContractById_ReturnsOk_WhenContractExists()
+        public async Task GetContractById_Returns_passed_WhenContractExists()
         {
             var result = await _controller.GetContractById(1);
 
@@ -67,15 +67,15 @@ namespace TechMoveNunitsTests
             Assert.NotNull(contract);
             Assert.AreEqual(1, contract.ContractId);
         }
-
+        // return not found if contract does not exist
         [Test]
-        public async Task GetContractById_ReturnsNotFound_WhenContractDoesNotExist()
+        public async Task GetContractById_Return_NotFound_whenContract_does_not_exist()
         {
             var result = await _controller.GetContractById(2);
             Assert.IsInstanceOf<NotFoundObjectResult>(result);
         }
 
-        // ✅ POST: api/Contracts
+        // insert new contract while validating if the file is a pdf
         [Test]
         public async Task Create_ReturnsCreatedAtActionResult_WhenValidPdfUploaded()
         {
@@ -116,7 +116,7 @@ namespace TechMoveNunitsTests
             Assert.IsInstanceOf<BadRequestObjectResult>(result);
         }
 
-        // ✅ PUT: api/Contracts/{id}
+        // update a contract by id
         [Test]
         public async Task Edit_ReturnsOk_WhenUpdateSuccessful()
         {
@@ -129,7 +129,7 @@ namespace TechMoveNunitsTests
                 Status = Contract.ContractStatus.active
             };
 
-            // Detach tracked entity to avoid duplicate tracking
+
             var tracked = _context.Contracts.Local.FirstOrDefault(c => c.ContractId == contract.ContractId);
             if (tracked != null)
             {
@@ -150,9 +150,9 @@ namespace TechMoveNunitsTests
             Assert.IsInstanceOf<BadRequestObjectResult>(result);
         }
 
-        // ✅ DELETE: api/Contracts/{id}
+        // removal of contract by id 
         [Test]
-        public async Task DeleteContract_ReturnsNoContent_WhenContractDeleted()
+        public async Task DeleteContract_Returns_null_WhenContractDeleted()
         {
             var result = await _controller.DeleteContract(2);
 

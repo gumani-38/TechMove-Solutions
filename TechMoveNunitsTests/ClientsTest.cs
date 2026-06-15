@@ -35,9 +35,9 @@ namespace TechMoveNunitsTests
             _context.SaveChanges();
         }
 
-        // ✅ GET: api/Clients
+        // get client route
         [Test]
-        public async Task Index_ReturnsOkResult_WithClientsList()
+        public async Task Index_Returns_passed_WithClientsList()
         {
             var result = await _controller.Index();
 
@@ -49,7 +49,7 @@ namespace TechMoveNunitsTests
             Assert.AreEqual(2, clients.Count);
         }
 
-        // ✅ GET: api/Clients/{id}
+        // get client by id 
         [Test]
         public async Task GetClient_ReturnsOkResult_WhenClientExists()
         {
@@ -70,7 +70,7 @@ namespace TechMoveNunitsTests
             Assert.IsInstanceOf<NotFoundResult>(result);
         }
 
-        // ✅ POST: api/Clients
+        // insert a new client
         [Test]
         public async Task Create_ReturnsCreatedAtActionResult_WhenValid()
         {
@@ -86,7 +86,7 @@ namespace TechMoveNunitsTests
             Assert.AreEqual("Charlie", client.ClientName);
         }
 
-        // ✅ PUT: api/Clients/{id}
+        // update the client by id
         [Test]
         public async Task Edit_ReturnsNoContent_WhenUpdateSuccessful()
         {
@@ -98,7 +98,7 @@ namespace TechMoveNunitsTests
                 ContactDetails = "0000"
             };
 
-            // Detach tracked entity to avoid duplicate tracking
+    
             var tracked = _context.Clients.Local.FirstOrDefault(c => c.ClientId == existingClient.ClientId);
             if (tracked != null)
             {
@@ -120,7 +120,7 @@ namespace TechMoveNunitsTests
             Assert.IsInstanceOf<BadRequestObjectResult>(result);
         }
 
-        // ✅ DELETE: api/Clients/{id}
+        // removal of contract by id
         [Test]
         public async Task DeleteClient_ReturnsNoContent_WhenClientDeleted()
         {
