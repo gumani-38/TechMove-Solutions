@@ -52,7 +52,6 @@ namespace TechMove_API.Controllers
                 techMoveDbContext = techMoveDbContext.Where(c => c.Status == parsedStatus);
             }
 
-            // 4. Return standard HTTP 200 OK with the filtered payload data
             var filteredContracts = await techMoveDbContext.ToListAsync();
             return Ok(filteredContracts);
         }

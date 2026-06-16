@@ -27,13 +27,13 @@ namespace TechMove_API.Controllers
             var user = _context.Users.SingleOrDefault(u => u.Email == model.Username);
             if (user == null)
             {
-                // return invalid credentials response
+             
                 return BadRequest("Invalid username or password");
             }
             // bcrypt verification
             if (!BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
                 {
-                    // return invalid credentials response
+                   
                     return BadRequest("Invalid username or password");
             }
             if (user != null)

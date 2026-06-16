@@ -23,14 +23,12 @@ namespace TechMove_API.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            // 2. Changed from return View() to return Ok() with data
             var clients = await _context.Clients.ToListAsync();
             return Ok(clients);
         }
 
         // POST: api/Clients
         [HttpPost]
-        // 3. Removed [ValidateAntiForgeryToken] and [Bind] (not used in REST APIs)
         public async Task<IActionResult> Create([FromBody] Client client)
         {
             if (ModelState.IsValid)
@@ -38,13 +36,12 @@ namespace TechMove_API.Controllers
                 _context.Add(client);
                 await _context.SaveChangesAsync();
 
-                // 4. Returns a standard HTTP 201 Created response pointing to the resource
                 return CreatedAtAction(nameof(Index), new { id = client.ClientId }, client);
             }
             return BadRequest(ModelState);
         }
         // Get Client by ID: api/Clients/5
-        [HttpGet("{id}")] // 5. Added route parameter to get client by
+        [HttpGet("{id}")] 
         public async Task<IActionResult> GetClient(int id)
         {
             var client = await _context.Clients.FindAsync(id);
@@ -56,7 +53,7 @@ namespace TechMove_API.Controllers
         }
 
         // PUT: api/Clients/5
-        [HttpPut("{id}")] // 5. Changed verb to HttpPut and added route parameter to resolve Swagger conflicts
+        [HttpPut("{id}")] 
         public async Task<IActionResult> Edit(int id, [FromBody] Client client)
         {
             if (id != client.ClientId)
@@ -82,14 +79,14 @@ namespace TechMove_API.Controllers
                         throw;
                     }
                 }
-                return NoContent(); // 6. Standard API response for a successful update (HTTP 204)
+                return NoContent(); 
             }
             return BadRequest(ModelState);
         }
 
 
         // delete client by id: api/Clients/5
-        [HttpDelete("{id}")] // 9. Added route parameter to delete client by
+        [HttpDelete("{id}")] 
         public async Task<IActionResult> DeleteClient(int id)
         {
             var client = await _context.Clients.FindAsync(id);
@@ -99,7 +96,7 @@ namespace TechMove_API.Controllers
             }
             _context.Clients.Remove(client);
             await _context.SaveChangesAsync();
-            return NoContent(); // 10. Standard API response for successful deletion
+            return NoContent(); 
         }
 
 

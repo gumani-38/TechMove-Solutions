@@ -24,20 +24,17 @@ namespace TechMove_API.Controllers
         {
             try
             {
-                // 1. Calculate counts efficiently
                 var totalClients = await _context.Clients.CountAsync();
                 var activeContracts = await _context.Contracts.CountAsync(c => c.Status == Contract.ContractStatus.active);
                 var expiredContracts = await _context.Contracts.CountAsync(c => c.Status == Contract.ContractStatus.expired);
                 var pendingRequests = await _context.ServiceRequests.CountAsync(sr => sr.Status == ServiceRequest.ServiceRequestStatus.pending);
                 var completedRequests = await _context.ServiceRequests.CountAsync(sr => sr.Status == ServiceRequest.ServiceRequestStatus.completed);
 
-                // 2. Fetch monthly contract distributions
                 var contracts = await _context.Contracts.Select(c => c.StartDate.Month).ToListAsync();
                 var monthlyContracts = Enumerable.Range(1, 12)
                     .Select(month => contracts.Count(m => m == month))
                     .ToList();
 
-                // 3. Compile everything into a clear, decoupled metrics model
                 var metrics = new
                 {
                     TotalClients = totalClients,

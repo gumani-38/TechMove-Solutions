@@ -59,15 +59,20 @@ namespace TechMove_API.Controllers
 
         // get the currency conversion result using exchangerate api passes in the amount which is always in USD and covert it to ZAR
         // GET: api/Currency/Convert
-        [HttpGet("Convert")] // 1. Set a clean, explicit string path name
-        public async Task<IActionResult> GetConvertedCurrency([FromQuery] decimal amount) // 2. Switched parameter binding to FromQuery
+        [HttpGet("Convert")] 
+        public async Task<IActionResult> GetConvertedCurrency([FromQuery] decimal amount) 
         {
             try
             {
                
                 var response = await _httpClient.GetAsync("https://v6.exchangerate-api.com/v6/26e1f641a6dd35fe3871f17a/latest/USD");
+                // print the response of the log 
 
-                response.EnsureSuccessStatusCode();
+                var rawContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"[CurrencyProxy] Response from API: {rawContent}");
+        
+
+                        response.EnsureSuccessStatusCode();
 
                 var json = await response.Content.ReadAsStringAsync();
                 var data = System.Text.Json.JsonDocument.Parse(json);
@@ -79,7 +84,7 @@ namespace TechMove_API.Controllers
 
                 var convertedAmount = amount * rate;
 
-                // 4. Return standard HTTP 200 OK along with the composite JSON conversion details
+               
                 return Ok(new
                 {
                     SourceCurrency = "USD",
@@ -100,9 +105,9 @@ namespace TechMove_API.Controllers
         // POST: api/ServiceRequests
         [HttpPost]
   
-        public async Task<IActionResult> Create([FromBody] ServiceRequest serviceRequest) // 2. Added [FromBody] and stripped [Bind]
+        public async Task<IActionResult> Create([FromBody] ServiceRequest serviceRequest) 
         {
-            // 3. Validate if the contract exists and is active
+
             var contract = await _context.Contracts.FindAsync(serviceRequest.ContractId);
             if (contract == null)
             {
@@ -120,7 +125,7 @@ namespace TechMove_API.Controllers
             {
                 try
                 {
-                    // 5. Reused an injected HttpClient or standalone instance securely
+                    
                     using var httpClient = new HttpClient();
                     var response = await httpClient.GetAsync("https://v6.exchangerate-api.com/v6/26e1f641a6dd35fe3871f17a/latest/USD");
                     response.EnsureSuccessStatusCode();
@@ -130,7 +135,6 @@ namespace TechMove_API.Controllers
 
                     var rate = data.RootElement.GetProperty("conversion_rates").GetProperty("ZAR").GetDecimal();
 
-                    // Apply converted currency rate calculations
                     serviceRequest.Cost = serviceRequest.Cost * rate;
 
                     // Execute pattern matching via your Factory
@@ -150,19 +154,19 @@ namespace TechMove_API.Controllers
         }
 
         // PUT: api/ServiceRequests/5
-        [HttpPut("{id}")] // 1. Changed verb to HttpPut and added the path parameter to resolve route collisions
-        public async Task<IActionResult> Edit(int id, [FromBody] ServiceRequest serviceRequest) // 2. Added [FromBody] and stripped [Bind]
+        [HttpPut("{id}")] 
+        public async Task<IActionResult> Edit(int id, [FromBody] ServiceRequest serviceRequest) 
         {
             if (id != serviceRequest.Id)
             {
-                return BadRequest(new { message = "Mismatched Service Request ID between URL route and payload body." }); // 3. Return 400 BadRequest instead of NotFound for ID mismatch
+                return BadRequest(new { message = "Mismatched Service Request ID between URL route and payload body." }); 
             }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // 4. Reuse or safe setup of your external currency HTTP retrieval tool
+             
                     using var httpClient = new HttpClient();
                     var response = await httpClient.GetAsync("https://v6.exchangerate-api.com/v6/26e1f641a6dd35fe3871f17a/latest/USD");
                     response.EnsureSuccessStatusCode();
@@ -215,7 +219,7 @@ namespace TechMove_API.Controllers
             }
             _context.ServiceRequests.Remove(serviceRequest);
             await _context.SaveChangesAsync();
-            return NoContent(); // 204 No Content is standard for successful deletes
+            return NoContent();
         }
 
         private bool ServiceRequestExists(int id)
