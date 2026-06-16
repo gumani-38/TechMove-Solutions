@@ -35,3 +35,8 @@ Look for TechMove_Database_Script with in the main project [TechMove_Database_Sc
 
 # Presentation Video 
 The presentation video will be in the project named TechMove_Presenation.mp4
+
+# Technical Report 
+
+1. Delivering frequent, incremental changes is the main goal of continuous integration and deployment (CI/CD), which allows you to receive regular feedback on your product or service. Faster and more frequent delivery, however, shouldn't lower the product's quality.Testing has long been a component of software development processes and is crucial to guaranteeing software quality.It is not feasible to conduct a complete set of manual tests at least once a day. For this reason, a crucial component of any CI/CD pipeline is automated testing.Among the many advantages of automated testing are Every code modification is examined to make sure it functions as intended and hasn't added any new bugs.Feedback is provided more quickly than when the same tests are carried out by hand  (JetBrains, 2000).
+2. For instance, you applications is successfuly running within your local laptop or pc but when you attempt to shipp it in a diffirent environment suchs as servers in cloud it fails this is a identified as "It work on my machine problem". Usually, environment drift is the cause of the issue rather than your code. The production server just doesn't have the same OS configurations, environment variables, and library versions as your laptop.Docker is your code's pod. It ensures that your program runs flawlessly on a MacBook, Windows computer, or Linux server by packaging it with all the dependencies it requires. Thereofore, solving the it work on my machine problem (Unalmis, 2023).
