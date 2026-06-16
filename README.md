@@ -31,7 +31,7 @@ After successfully creating. now you can run the project.
 Look for TechMove_Database_Script with in the main project [TechMove_Database_Script.sql](https://github.com/user-attachments/files/27955378/TechMove_Database_Script.sql)
 
 # GITHUB Link
-[Github Project Link](https://github.com/gumani-38/Gumani_Moila_EAPD7111w_POE)
+[Github Project Link](https://github.com/gumani-38/TechMove-Solutions)
 
 # Presentation Video 
 The presentation video will be in the project named TechMove_Presenation.mp4
