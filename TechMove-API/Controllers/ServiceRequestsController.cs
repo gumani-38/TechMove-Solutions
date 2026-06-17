@@ -66,10 +66,7 @@ namespace TechMove_API.Controllers
             {
                
                 var response = await _httpClient.GetAsync("https://v6.exchangerate-api.com/v6/26e1f641a6dd35fe3871f17a/latest/USD");
-                // print the response of the log 
-
-                var rawContent = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"[CurrencyProxy] Response from API: {rawContent}");
+          
         
 
                         response.EnsureSuccessStatusCode();
