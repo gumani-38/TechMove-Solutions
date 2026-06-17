@@ -24,14 +24,21 @@ After successfully creating. now you can run the project.
 
 
 ## Nunits Test
-<img width="1919" height="1014" alt="image" src="https://github.com/user-attachments/assets/7705bc9b-95c6-48c4-831c-91c1f82a444d" />
+<img width="1913" height="1031" alt="image" src="https://github.com/user-attachments/assets/523249f5-f5c5-40f0-a577-a5dc44552b69" />
+
+# DATABASE View
+<img width="1917" height="1016" alt="image" src="https://github.com/user-attachments/assets/3c035555-025d-4236-9328-9c8e2623b79f" />
+
+<img width="1918" height="1042" alt="image" src="https://github.com/user-attachments/assets/fd76c3f7-4b2c-4152-bd24-56b4a79c8bc8" />
+
+
 
 
 # Manual SSMS(SQL SERVER MANAGEMENT STUDIO) Database Migration Script
 Look for TechMove_Database_Script with in the main project [TechMove_Database_Script.sql](https://github.com/user-attachments/files/27955378/TechMove_Database_Script.sql)
 
 # GITHUB Link
-[Github Project Link](https://github.com/gumani-38/Gumani_Moila_EAPD7111w_POE)
+[Github Project Link](https://github.com/gumani-38/TechMove-Solutions)
 
 # Presentation Video 
 The presentation video will be in the project named TechMove_Presenation.mp4
@@ -40,3 +47,9 @@ The presentation video will be in the project named TechMove_Presenation.mp4
 
 1. Delivering frequent, incremental changes is the main goal of continuous integration and deployment (CI/CD), which allows you to receive regular feedback on your product or service. Faster and more frequent delivery, however, shouldn't lower the product's quality.Testing has long been a component of software development processes and is crucial to guaranteeing software quality.It is not feasible to conduct a complete set of manual tests at least once a day. For this reason, a crucial component of any CI/CD pipeline is automated testing.Among the many advantages of automated testing are Every code modification is examined to make sure it functions as intended and hasn't added any new bugs.Feedback is provided more quickly than when the same tests are carried out by hand  (JetBrains, 2000).
 2. For instance, you applications is successfuly running within your local laptop or pc but when you attempt to shipp it in a diffirent environment suchs as servers in cloud it fails this is a identified as "It work on my machine problem". Usually, environment drift is the cause of the issue rather than your code. The production server just doesn't have the same OS configurations, environment variables, and library versions as your laptop.Docker is your code's pod. It ensures that your program runs flawlessly on a MacBook, Windows computer, or Linux server by packaging it with all the dependencies it requires. Thereofore, solving the it work on my machine problem (Unalmis, 2023).
+
+# Reference List 
+JetBrains. n.d. Automated testing in CI/CD. [online] JetBrains. Available at: <https://www.jetbrains.com/teamcity/ci-cd-guide/automated-testing/> [Accessed 16 June 2026].
+
+Unalmis, S. 2023. Let’s stop the “it works on my machine” drama together: A Docker guide. [online] Medium. Available at: <https://medium.com/@senaunalmis/lets-stop-the-it-works-on-my-machine-drama-together-a-docker-guide-3642a32df746> [Accessed 16 June 2026].
+
