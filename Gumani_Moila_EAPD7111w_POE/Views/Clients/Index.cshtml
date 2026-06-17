@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Gumani_Moila_EAPD7111w_POE.Models.Client>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="w-full flex justify-between items-center mb-20 px-4">
+    <a href="javascript:history.back()"
+       class="inline-flex items-center px-3 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all shadow-sm">
+        <i class="fa-solid fa-arrow-left mr-2"></i>
+        <span class="text-sm">Back</span>
+    </a>
+    <a asp-action="Create" class="bg-blue-600 py-2 px-3 rounded text-white text-sm">Add client</a>
+</div>
+
+<div class="flex flex-wrap gap-3 p-12 justify-center items-center">
+@foreach (var item in Model) {
+        <div class="max-w-sm w-full shadow-sm rounded py-2 px-2">
+                <div class="flex justify-between items-center flex-row w-full">
+                    <p class="text-base font-medium capitalize">@Html.DisplayFor(modelItem => item.ClientName)</p>
+                </div>
+                <div class="flex justify-between items-center flex-row w-full">
+                <p class="text-sm text-gray-700 font-normal">@Html.DisplayFor(modelItem => item.ContactDetails)</p>
+                <p class="text-sm text-gray-700 font-normal">@Html.DisplayFor(modelItem => item.ClientRegion)</p>
+                </div>
+                <div class="flex justify-between items-center flex-row">
+                    <a asp-action="Edit" class="text-blue-600 text-sm" asp-route-id="@item.ClientId"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <a asp-action="Delete" class="text-red-600 text-sm" asp-route-id="@item.ClientId"><i class="fa-regular fa-trash-can"></i></a>
+                </div>
+        </div>
+       
+}
+</div>

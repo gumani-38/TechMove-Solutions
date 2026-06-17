@@ -1,0 +1,43 @@
+﻿@model Gumani_Moila_EAPD7111w_POE.Models.ServiceRequest
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="w-full flex flex-row justify-between items-center mb-20 px-4">
+    <a href="javascript:history.back()"
+       class="inline-flex items-center px-3 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all shadow-sm">
+        <i class="fa-solid fa-arrow-left mr-2"></i>
+        <span class="text-sm">Back</span>
+    </a>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete service request" class="bg-red-600 py-1 px-3 text-sm text-white font-medium rounded text-center" />
+    </form>
+</div>
+
+
+<div class="w-full max-w-2xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div>
+            <label class="text-sm font-sm">Cost in Rand</label>
+            <input value="@Html.DisplayFor(model => model.Cost)" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-gray-100 outline-none transition-all" readonly />
+
+        </div>
+        <div>
+            <label class="text-sm font-sm">Description</label>
+            <input value="@Html.DisplayFor(model => model.Description)" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-gray-100 outline-none transition-all" readonly />
+
+        </div>
+        <div>
+            <label class="text-sm font-sm">Status</label>
+            <input value="@Html.DisplayFor(model => model.Status)" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-gray-100 outline-none transition-all" readonly />
+
+        </div>
+        <div>
+            <label class="text-sm font-sm">Contract</label>
+            <input value="@Html.DisplayFor(model => model.Contract.ContractId)" class="w-full px-3 py-2 rounded-lg border border-gray-300 bg-gray-100 outline-none transition-all" readonly />
+
+        </div>
+</div>
+</div>

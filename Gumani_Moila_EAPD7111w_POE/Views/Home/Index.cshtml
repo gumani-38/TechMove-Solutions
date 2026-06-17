@@ -1,0 +1,45 @@
+﻿@model Gumani_Moila_EAPD7111w_POE.Models.DashboardView
+
+<div class="container mt-4">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center mt-6">
+        <div class="bg-blue-600 text-white rounded-lg shadow p-6">
+            <h5 class="text-lg">Total Clients</h5>
+            <p class="text-3xl font-bold">@Model.TotalClients</p>
+        </div>
+        <div class="bg-green-600 text-white rounded-lg shadow p-6">
+            <h5 class="text-lg">Active Contracts</h5>
+            <p class="text-3xl font-bold">@Model.ActiveContracts</p>
+        </div>
+        <div class="bg-red-600 text-white rounded-lg shadow p-6">
+            <h5 class="text-lg">Expired Contracts</h5>
+            <p class="text-3xl font-bold">@Model.ExpiredContracts</p>
+        </div>
+        <div class="bg-indigo-600 text-white rounded-lg shadow p-6">
+            <h5 class="text-lg">Completed Requests</h5>
+            <p class="text-3xl font-bold">@Model.CompletedRequests</p>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <canvas id="contractsChart"></canvas>
+        <canvas id="requestsChart" class="mt-4"></canvas>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var contractsCtx = document.getElementById('contractsChart').getContext('2d');
+        var contractsChart = new Chart(contractsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Contracts',
+                    data: @Html.Raw(Json.Serialize(Model.MonthlyContracts)),
+                    backgroundColor: 'rgba(37, 99, 235, 0.7)'
+                }]
+            }
+        });
+    </script>
+}

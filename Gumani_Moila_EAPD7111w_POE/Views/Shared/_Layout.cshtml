@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Gumani_Moila_EAPD7111w_POE</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/css/output.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="stylesheet" href="~/Gumani_Moila_EAPD7111w_POE.styles.css" asp-append-version="true" />
+</head>
+<body class="box-border flex flex-col">
+    @{
+        var isAuthenticated = !string.IsNullOrEmpty(Context.Session.GetString("AuthToken"));
+    }
+
+    @if (isAuthenticated)
+        {
+            <header>
+                <nav class="fixed right-0 left-0 z-10  shadow-sm bg-white ">
+                    <div class="flex items-center justify-between mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+
+                        <h2 class="font-semibold text-xl">Tech Move</h2>
+                        <div class="relative flex h-16 items-center justify-between">
+                            <div class="inset-y-0 left-0 flex items-center sm:hidden">
+                                <!-- Mobile menu button -->
+                                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                                    <button type="button" onclick="toggleMobileMenu()"
+                                    class="inline-flex items-center justify-center rounded-md p-2 text-black hover:bg-gray-400 hover:text-white focus:outline-none">
+                                        <span class="sr-only">Open main menu</span>
+                                        <!-- Hamburger icon -->
+                                        <svg id="menuIcon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 6h16M4 12h16M4 18h16" />
+                                        </svg>
+                                        <!-- Close icon -->
+                                        <svg id="closeIcon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </div>
+
+                            </div>
+                            @{
+                                var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+                                var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+
+                                string NavClass(string controller, string action = null)
+                                {
+                                    var isMatch = string.Equals(currentController, controller, StringComparison.OrdinalIgnoreCase)
+                                    && (action == null || string.Equals(currentAction, action, StringComparison.OrdinalIgnoreCase));
+                                    return isMatch
+                                    ? "block rounded-md bg-gray-900 px-3 py-1 text-base font-medium text-white"
+                                    : "block rounded-md px-3 py-1 text-base font-medium hover:text-blue-600";
+                                }
+                            }
+                            <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                                <div class="hidden sm:ml-6 sm:block">
+                                    <div class="flex space-x-4">
+                                        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
+                                        <a asp-controller="Home" asp-action="Index" class="@(NavClass("Home", "Index"))">Home</a>
+                                        <a asp-controller="Clients" asp-action="Index" class="@(NavClass("Venues", "Index"))">Client</a>
+                                        <a asp-controller="Contracts" asp-action="Index" class="@(NavClass("Events", "Index"))">Contract</a>
+                                        <a asp-controller="ServiceRequests" asp-action="Index" class="@(NavClass("Bookings", "Index"))">Service Request</a>
+                                        <a asp-controller="Auth" asp-action="Logout" class="block rounded-md px-3 py-1 text-base font-medium hover:text-red-600">
+   Logout
+</a>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- ✅ MOBILE MENU GOES HERE -->
+                    <div id="mobileMenu" class="hidden sm:hidden bg-gray-200">
+                        <div class="space-y-1 px-2 pt-2 pb-3">
+                            <a asp-controller="Home" asp-action="Index" class="block px-3 py-2 ">Home</a>
+                            <a asp-controller="Clients" asp-action="Index" class="block px-3 py-2 ">Client</a>
+                            <a asp-controller="Contracts" asp-action="Index" class="block px-3 py-2 ">Contracts</a>
+                            <a asp-controller="ServiceRequests" asp-action="Index" class="block px-3 py-2 ">Service Request</a>
+<a asp-controller="Auth" asp-action="Logout" 
+   class="block rounded-md px-3 py-1 text-base font-medium hover:text-red-600">
+   Logout
+</a>
+
+
+
+                        </div>
+                    </div>
+                </nav>
+            </header>
+        }
+        <div class="pt-20">
+        <main role="main" class="pb-3 px-5 mt-10 mb-10">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+                toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "timeOut": "4000"
+        }
+                 function toggleMobileMenu() {
+            const menu = document.getElementById("mobileMenu");
+            const menuIcon = document.getElementById("menuIcon");
+            const closeIcon = document.getElementById("closeIcon");
+
+            menu.classList.toggle("hidden");
+            menuIcon.classList.toggle("hidden");
+            closeIcon.classList.toggle("hidden");
+        }
+             $(document).ready(function () {
+
+            var successMessage = '@TempData["Success"]';
+            var errorMessage = '@TempData["Error"]';
+            var infoMessage = '@TempData["Info"]';
+            var warningMessage = '@TempData["Warning"]';
+
+            if (successMessage)
+                toastr.success(successMessage);
+
+            if (errorMessage)
+                toastr.error(errorMessage);
+
+            if (infoMessage)
+                toastr.info(infoMessage);
+
+            if (warningMessage)
+                toastr.warning(warningMessage);
+        });
+              document.getElementById("togglePassword")?.addEventListener("click", function() {
+            const passwordInput = document.getElementById("Password");
+            const toggleIcon = document.getElementById("toggleIcon");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleIcon.classList.remove("fa-eye-slash");
+                toggleIcon.classList.add("fa-eye");
+            } else {
+                passwordInput.type = "password";
+                toggleIcon.classList.remove("fa-eye");
+                toggleIcon.classList.add("fa-eye-slash");
+            }
+        });
+</script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,33 @@
+﻿@model Gumani_Moila_EAPD7111w_POE.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<div class="flex justify-center items-center h-[100vh]">
+
+    <form asp-action="Login" asp-controller="Auth" method="post" class="max-w-md w-full flex flex-col border-1 border-gray-300 rounded p-8">
+        <span class="text-center mb-3 font-semibold text-xl text-gray-700">Tech Move</span>
+        <span class="text-center mb-8 font-semibold text-xl">Login</span>
+        <div asp-validation-summary="ModelOnly" class="text-red-600 text-center mb-3"></div>
+        <div class="flex flex-col mb-4">
+            <label asp-for="Username" class="text-sm font-medium capitalize">Email</label>
+            <input asp-for="Username" placeholder="Enter your email" type="email" class="py-2 px-3 bg-gray-300 rounded border-0 outline-none transition-all" />
+            <span asp-validation-for="Username" class="text-red-600"></span>
+        </div>
+        <div class="flex flex-col mb-4">
+            <label asp-for="Password" class="text-sm font-medium capitalize">Password</label>
+            <div class="py-2 px-3 bg-gray-300 rounded flex flex-row items-center">
+                <input asp-for="Password" placeholder="Enter your password" type="password" id="Password" class="flex-1 border-0 outline-none transition-all" />
+                @* // toggle password visiblity *@
+                <span id="togglePassword" class="cursor-pointer">
+                    <i class="fa-regular fa-eye-slash" id="toggleIcon"></i>
+                </span>
+            </div>
+            <span asp-validation-for="Password" class="text-red-600"></span>
+        </div>
+
+        <input type="submit" class="bg-blue-600 mt-10 rounded px-3 py-2 text-center font-medium text-base hover:bg-black text-white" value="Login" />
+
+    </form>
+</div>

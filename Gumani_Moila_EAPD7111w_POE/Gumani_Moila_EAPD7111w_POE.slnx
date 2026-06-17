@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="../TechMove-API/TechMove-API.csproj" />
+  <Project Path="../TechMoveNunitsTests/TechMoveNunitsTests.csproj" />
+  <Project Path="Gumani_Moila_EAPD7111w_POE.csproj" />
+</Solution>
